@@ -1,0 +1,32 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hoja7;
+
+import java.util.PriorityQueue;
+
+/**
+ *
+ * @author Juan Pablo Merck
+ */
+public class Heap {
+    //variables
+    
+    private PriorityQueue<Nodo<Integer, Character>> nodos;
+    
+    //constructor
+    public Heap(){
+        nodos=new PriorityQueue(new NodeComparator());
+    
+    }
+    
+    //setter y getter para los Nodos entrantes
+    public void setNodos(PriorityQueue<Nodo<Integer, Character>> nodos) {
+        this.nodos = nodos;
+    }
+    public PriorityQueue<Nodo<Integer, Character>> getNodos() {
+        return nodos;
+    }
+}
