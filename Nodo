@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hoja7;
+
+/**
+ *
+ * @author Juan Pablo Merck
+ */
+public class Nodo<K,V> {
+
+    Nodo(Nodo<Integer, Character> root) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public K getFrecuencia() {
+        return frecuencia;
+    }
+
+    public void setFrecuencia(K frecuencia) {
+        this.frecuencia = frecuencia;
+    }
+
+    public V getValor() {
+        return valor;
+    }
+
+    public void setValor(V valor) {
+        this.valor = valor;
+    }
+
+    public Nodo<K, V> getIzq() {
+        return izq;
+    }
+
+    public void setIzq(Nodo<K, V> izq) {
+        this.izq = izq;
+    }
+
+    public Nodo<K, V> getDer() {
+        return der;
+    }
+
+    public void setDer(Nodo<K, V> der) {
+        this.der = der;
+    }
+    //variables
+    private K frecuencia;//las veces que se repite una letra
+    private V valor;
+    private Nodo<K,V> izq;//rama que estara a la izquierda, contendra todos los valores menos que el heap
+    private Nodo<K,V> der;// rama que estara a la derecha, contendra todos los valores mayores que el heap
+
+    //constructor
+    public Nodo(K frecuencia, V valor, Nodo<K,V> izq, Nodo<K,V> der){
+        this.frecuencia=frecuencia;
+        this.valor=valor;
+        this.izq=izq;
+        this.der=der;
+    }
+    public Nodo(){
+    }
+    
+}
