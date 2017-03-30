@@ -10,56 +10,106 @@ package hoja7;
  * @author Juan Pablo Merck
  */
 public class Nodo<K,V> {
+    
+    private K frecuencia;
+    private V valor;
+    private Nodo<K,V> izquierdo;
+    private Nodo<K,V> derecho;
 
-    Nodo(Nodo<Integer, Character> root) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     *
+     */
+    public Nodo() {
     }
 
-    public K getFrecuencia() {
-        return frecuencia;
+    /**
+     *
+     * @param frecuencia
+     * @param valor
+     * @param izquierdo
+     * @param derecho
+     */
+    public Nodo(K frecuencia, V valor, Nodo<K, V> izquierdo, Nodo<K, V> derecho) {
+        this.frecuencia = frecuencia;
+        this.valor = valor;
+        this.izquierdo = izquierdo;
+        this.derecho = derecho;
+    }
+    
+    /**
+     *
+     * @param node
+     */
+    public Nodo(Nodo node){
+        frecuencia = (K) node.getFrecuencia();
+        valor = (V) node.getValor();
+        izquierdo = node.getIzquierdo();
+        derecho = node.getDerecho();
     }
 
+    /**
+     *
+     * @param derecho
+     */
+    public void setDerecho(Nodo<K, V> derecho) {
+        this.derecho = derecho;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Nodo<K, V> getDerecho() {
+        return derecho;
+    }
+
+    /**
+     *
+     * @param frecuencia
+     */
     public void setFrecuencia(K frecuencia) {
         this.frecuencia = frecuencia;
     }
 
-    public V getValor() {
-        return valor;
+    /**
+     *
+     * @return
+     */
+    public K getFrecuencia() {
+        return frecuencia;
     }
 
+    /**
+     *
+     * @param izquierdo
+     */
+    public void setIzquierdo(Nodo<K, V> izquierdo) {
+        this.izquierdo = izquierdo;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Nodo<K, V> getIzquierdo() {
+        return izquierdo;
+    }
+
+    /**
+     *
+     * @param valor
+     */
     public void setValor(V valor) {
         this.valor = valor;
     }
 
-    public Nodo<K, V> getIzq() {
-        return izq;
+    /**
+     *
+     * @return
+     */
+    public V getValor() {
+        return valor;
     }
-
-    public void setIzq(Nodo<K, V> izq) {
-        this.izq = izq;
-    }
-
-    public Nodo<K, V> getDer() {
-        return der;
-    }
-
-    public void setDer(Nodo<K, V> der) {
-        this.der = der;
-    }
-    //variables
-    private K frecuencia;//las veces que se repite una letra
-    private V valor;
-    private Nodo<K,V> izq;//rama que estara a la izquierda, contendra todos los valores menos que el heap
-    private Nodo<K,V> der;// rama que estara a la derecha, contendra todos los valores mayores que el heap
-
-    //constructor
-    public Nodo(K frecuencia, V valor, Nodo<K,V> izq, Nodo<K,V> der){
-        this.frecuencia=frecuencia;
-        this.valor=valor;
-        this.izq=izq;
-        this.der=der;
-    }
-    public Nodo(){
-    }
+    
     
 }
