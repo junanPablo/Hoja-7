@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author Juan Pablo Merck
  */
 public class Huffman {
- private Arbol<Integer,Character> tree = new Arbol();
+
+    private Arbol<Integer,Character> tree = new Arbol();
     private Heap h = new Heap();
     private ArrayList<Integer> frecuencias = new ArrayList(); //Lista con frecuencias
     private ArrayList<Character> letras = new ArrayList(); //Lista con caracteres.
@@ -71,8 +72,8 @@ public class Huffman {
                 temporal2 = h.getNodos().remove(); //Se remueve.
                 acumulada = temporal.getFrecuencia() + temporal2.getFrecuencia(); //Se suman sus frecuencias y se ponen en la nueva raíz.
                 raiz = new Nodo(acumulada,' ',null,null); //La nueva raíz toma ambos temporales como sus hijos y se coloca como raíz.
-                raiz.setIzq(temporal2);
-                raiz.setDer(temporal);
+                raiz.setIzquierdo(temporal2);
+                raiz.setDerecho(temporal);
                 tree.setRoot(new Nodo(raiz));
             }
             else{ //Si el árbol no tiene más elementos que remover o si ya tiene una raíz. Se corre este código si solo existe un elemento.
@@ -84,8 +85,8 @@ public class Huffman {
                 else{
                     acumulada = tree.getRoot().getFrecuencia() + temporal.getFrecuencia(); //Se acumula toda la frecuencia.
                     raiz = new Nodo(tree.getRoot()); //Se crea una copia de la raíz.
-                    tree.getRoot().setDer(raiz); //Dicha copia se coloca a la derecha de la raíz.
-                    tree.getRoot().setIzq(temporal); //El nuevo nodo temporal se coloca a la izquierda.
+                    tree.getRoot().setDerecho(raiz); //Dicha copia se coloca a la derecha de la raíz.
+                    tree.getRoot().setIzquierdo(temporal); //El nuevo nodo temporal se coloca a la izquierda.
                     tree.getRoot().setFrecuencia(acumulada); //Se le coloca como frecuencia la frecuencia acumulada total.
                 }
             }
@@ -98,13 +99,13 @@ public class Huffman {
      * @param codigo
      */
     public void printTable(Nodo<Integer,Character> nodo, String codigo){
-        if (nodo.getDer() == null && nodo.getIzq() == null) //Imprime el hijo de hasta abajo.
+        if (nodo.getDerecho() == null && nodo.getIzquierdo() == null) //Imprime el hijo de hasta abajo.
             System.out.println("  " + nodo.getValor() + "      " + nodo.getFrecuencia() + "      " + codigo);
         else{
-            if (nodo.getIzq() != null) //Si tuvo que cruzar a la izquierda, le concatena un cero a su código.
-                printTable(nodo.getIzq(), codigo + "0");
-            if (nodo.getDer() != null) //Si tuvo que cruzar a la derecha, le concatena un 1 a su código.
-                printTable(nodo.getDer(), codigo + "1");
+            if (nodo.getIzquierdo() != null) //Si tuvo que cruzar a la izquierda, le concatena un cero a su código.
+                printTable(nodo.getIzquierdo(), codigo + "0");
+            if (nodo.getDerecho() != null) //Si tuvo que cruzar a la derecha, le concatena un 1 a su código.
+                printTable(nodo.getDerecho(), codigo + "1");
         }
     }
     
@@ -122,7 +123,7 @@ public class Huffman {
                 temp = node; //Si no es nulo, sigue en el mismo nodo.
             if (mensaje.length() > 0){ //Siempre y cuando haya caracteres del código para analizar.
                 if (mensaje.charAt(0) == '0'){ //Si el código es cero, obvaiamente es el fin de una ramificación e imprime el valor de dicho nodo.
-                    temp = temp.getIzq(); //Busca el hijo izquierdo ya que el código es cero.
+                    temp = temp.getIzquierdo(); //Busca el hijo izquierdo ya que el código es cero.
                     decodificado = decodificado + temp.getValor(); //concatena el caracter al mensaje decodificado.
                     if (mensaje.length() > 0){
                         mensaje = mensaje.substring(1);
@@ -130,8 +131,8 @@ public class Huffman {
                     }
                 }
                 else if (mensaje.charAt(0) == '1'){ //Si el caracter es uno, analiza si es el final de la rama o si puede continuar a la derecha.
-                    temp = temp.getDer(); //Avanza a la derecha del árbol al ser '1'.
-                    if (temp.getDer() == null){ //Si es el fin de la rama, concatena el mensaje del final de la rama.
+                    temp = temp.getDerecho(); //Avanza a la derecha del árbol al ser '1'.
+                    if (temp.getDerecho() == null){ //Si es el fin de la rama, concatena el mensaje del final de la rama.
                         decodificado = decodificado + temp.getValor();
                         if (mensaje.length() > 0){
                             mensaje = mensaje.substring(1);
@@ -140,7 +141,7 @@ public class Huffman {
                     }
                     else{
                         mensaje = mensaje.substring(1);
-                        if (mensaje.length() == 0 && temp.getDer() == null){
+                        if (mensaje.length() == 0 && temp.getDerecho() == null){
                             mensaje = "1";
                             decodificado = decodificado + temp.getValor();
                         }
@@ -172,5 +173,5 @@ public class Huffman {
      */
     public Arbol<Integer,Character> getTree(){
         return tree;
-    }    
+    } 
 }
